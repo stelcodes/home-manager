@@ -10,6 +10,7 @@
       temperature.day = 6000;
       temperature.night = 3500;
       gamma = "0.6";
+      outputs = [ "eDP-1" "HDMI-A-1" ];
       systemdTarget = "test.target";
     };
 

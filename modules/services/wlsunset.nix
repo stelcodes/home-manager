@@ -63,6 +63,14 @@ in {
       '';
     };
 
+    outputs = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = ''
+        Names of outputs to adjust.
+      '';
+    };
+
     systemdTarget = mkOption {
       type = types.str;
       default = "graphical-session.target";
@@ -92,7 +100,7 @@ in {
             "-t ${toString cfg.temperature.night}"
             "-T ${toString cfg.temperature.day}"
             "-g ${cfg.gamma}"
-          ];
+          ] ++ (map cfg.outputs (output: "-o ${escapeShellArg output}"));
         in "${cfg.package}/bin/wlsunset ${concatStringsSep " " args}";
       };
 
